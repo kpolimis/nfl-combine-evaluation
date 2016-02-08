@@ -26,7 +26,7 @@ Download an install Python 2.7 from [`here`](http://continuum.io/downloads#all)
 
 5. Installing the required packages
     ~~~bash
-        pip install -r Python_venv/requirements.txt
-        ~~~
+    pip install -r Python_venv/requirements.txt
+    ~~~
 
 
