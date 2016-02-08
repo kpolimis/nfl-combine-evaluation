@@ -12,8 +12,6 @@ Download an install Python 2.7 from [`here`](http://continuum.io/downloads#all)
     Go to
 3. Starting a Python virtual environment
  <br>
- (skip steps 4,9 if you want to install the packages directly on your computer; us$
-
    ~~~bash
    cd Python_venv
    conda create -n venv python=2.7
