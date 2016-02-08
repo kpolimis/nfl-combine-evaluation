@@ -1,16 +1,11 @@
-  ~~~bash
-        pip install -r Python_venv/requirements.txt
-        ~~~
 # nflPlayerPerformance
 collaborators: Long Chen, Melaku Dubie, Rich Lee and Kivan Polimis
 
 To install and run:
 OSX install instructions (Maverick & Yosemite):
 
-Windows install instructions (Windows 8 and 10): 
-Installing python with Anaconda<br>
 
-Download an install Python 2.7 from [`here`] (http://continuum.io/downloads#all) ($
+Download an install Python 2.7 from [`here`](http://continuum.io/downloads#all) 
 
 
 2. Obtaining the files<br>
