@@ -34,3 +34,5 @@ Download and install Python 2.7 from [`here`](http://continuum.io/downloads#all)
     ~~~bash
     pip install -r Python_venv/requirements.txt
     ~~~
+
+We chose a BSD license to (hopefully) increase the amount of potential users and contributors.
