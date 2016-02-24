@@ -40,6 +40,9 @@ def plot_graph():
     #Filter dataset based on user selections
     pfr = pd.read_csv('data/pfr1990_2008.csv')
     userSelection = [teams[teamA], teams[teamB], year]
+    pfr.columns = ['ID', 'LastName', 'FirstName', 'Year', 'Team', 'Position',
+        'G', 'GS', 'COMP', 'ATT', 'PassYD','PassTD', 'INT', 'rush', 'rushYD',
+        'rushTD', 'rec', 'recYD', 'recTD']
     pfrTeams = pfr[pfr.Team.isin(userSelection)]
     pfrTeamsYear = pfrTeams[pfrTeams.Year.isin(userSelection)]
     pfrAgg = pfrTeamsYear[['COMP','ATT','PassYD','PassTD','INT','rush',
