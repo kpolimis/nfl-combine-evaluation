@@ -55,3 +55,5 @@ def plot_graph():
     plt.legend(fontsize = 14, loc = 'best')
     plt.suptitle(year, fontsize=24)
     plt.savefig('sample_plot.png', bbox_inches='tight')
+
+    #Documentation looks great
