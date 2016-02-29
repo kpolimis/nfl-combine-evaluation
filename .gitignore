@@ -58,3 +58,6 @@ target/
 
 #ipython notebook checkpoints
 .ipynb_checkpoints/
+
+#csv files
+*.fuse*
