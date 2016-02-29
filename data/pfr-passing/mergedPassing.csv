@@ -1,4 +1,4 @@
-name,team,age,position,games_played,games_started,record,completions,attempts,completionPct,passing_yards,passing_TD,passing_TDPct,passing_INT,passing_INTPct,passing_long,passing_ydsAtt,passing_airydsAtt,passing_ydsComp,passing_ydsGame,passing_rating,passing_sacks,passing_sacksyds,passing_netyds,passing_airnetydsAtt,passing_sackPct,4thQC,gamewinningdrives,year
+name,team,age,position,games_played,games_started,record,completions,attempts,completionPct,passing_yards,passing_TD,passing_TDPct,passing_INT,passing_INTPct,passing_long,passing_ydsAtt,passing_airydsAtt,passing_ydsComp,passing_ydsGame,passing_rating,passing_sacks,passing_sacksyds,passing_netyds,passing_airnetydsAtt,passing_sackPct,fourthQC,gamewinningdrives,year
 Vinny Testaverde,NYJ,37,QB,16,16,9/7/2000,328,590,55.6,3732,21,3.6,25,4.2,63,6.3,5.1,11.4,233.3,69,13,71,6.07,4.9,2.2,4,4,2000
 Brett Favre,GNB,31,QB,16,16,9/7/2000,338,580,58.3,3812,20,3.4,16,2.8,67,6.6,6,11.3,238.3,78,33,236,5.83,5.31,5.4,0,4,2000
 Peyton Manning*,IND,24,QB,16,16,10/6/2000,357,571,62.5,4413,33,5.8,15,2.6,78,7.7,7.7,12.4,275.8,94.7,20,131,7.25,7.22,3.4,2,3,2000
