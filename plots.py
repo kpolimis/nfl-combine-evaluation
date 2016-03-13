@@ -10,6 +10,11 @@ con = sqlite3.connect('data/nflPPdb.sqlite')
 
 #Create RB and WR dataframes
 def make_dfs():
+    """
+    Creates dataframes for plotting using SQL queries.
+
+    Returns a dataframe for each positional group (dfRB, dfWR, dfQB).
+    """
     df1 = pd.read_sql_query('SELECT combine.name, combine.fortyyd, combine.heightinchestotal,\
                             combine.weight, combine.twentyss, combine.vertical, combine.year\
                             FROM combine\
@@ -49,8 +54,20 @@ def make_dfs():
 
     return (dfRB, dfWR, dfQB)
 
-def rb(yvar, hover_lab, title, x_lab, dfRB, dfWR, dfQB):
-    source = ColumnDataSource(data=dict(x=dfRB[yvar], y=dfRB['totYds'],
+def rb(xvar, hover_lab, title, x_lab, dfRB, dfWR, dfQB):
+    """
+    Defines plot within RB tab.
+
+    Parameters:
+    xvar        x-axis variable (string)
+    hover_lab   hover label for x-axis variable (string)
+    title       title of plot (string)
+    x_lab       x-axis label (string)
+    dfRB        running back dataframe (dataframe)
+    dfWR        wide receiver dataframe (dataframe)
+    dfQB        quarterback dataframe (dataframe)
+    """
+    source = ColumnDataSource(data=dict(x=dfRB[xvar], y=dfRB['totYds'],
                                         rush=dfRB['rushing_yards'],
                                         rec=dfRB['receiving_yards'], name=dfRB['name'],))
     hover = HoverTool(tooltips=[('Player', '@name'),(hover_lab, '$x{1.11}'),
@@ -63,8 +80,20 @@ def rb(yvar, hover_lab, title, x_lab, dfRB, dfWR, dfQB):
     tab1 = Panel(child=p1, title='RB')
     return tab1
 
-def wr(yvar, hover_lab, title, x_lab, dfRB, dfWR, dfQB):
-    source = ColumnDataSource(data=dict(x=dfWR[yvar], y=dfWR['totYds'], rush=dfWR['rushing_yards'],
+def wr(xvar, hover_lab, title, x_lab, dfRB, dfWR, dfQB):
+    """
+    Defines plot within WR tab.
+
+    Parameters:
+    xvar        x-axis variable (string)
+    hover_lab   hover label for x-axis variable (string)
+    title       title of plot (string)
+    x_lab       x-axis label (string)
+    dfRB        running back dataframe (dataframe)
+    dfWR        wide receiver dataframe (dataframe)
+    dfQB        quarterback dataframe (dataframe)
+    """
+    source = ColumnDataSource(data=dict(x=dfWR[xvar], y=dfWR['totYds'], rush=dfWR['rushing_yards'],
                                         rec=dfWR['receiving_yards'], name=dfWR['name'],))
     hover = HoverTool(tooltips=[('Player', '@name'),(hover_lab, '$x{1.11}'),
                                 ('Career Rushing Yards', '@rush'),('Career Receiving Yards', '@rec'),
@@ -77,8 +106,20 @@ def wr(yvar, hover_lab, title, x_lab, dfRB, dfWR, dfQB):
     tab2 = Panel(child=p2, title='WR')
     return tab2
 
-def qb(yvar, hover_lab, title, x_lab, dfRB, dfWR, dfQB):
-    source = ColumnDataSource(data=dict(x=dfQB[yvar], y=dfQB['passing_yards'], name=dfQB['name'],))
+def qb(xvar, hover_lab, title, x_lab, dfRB, dfWR, dfQB):
+    """
+    Defines plot within QB tab.
+
+    Parameters:
+    xvar        x-axis variable (string)
+    hover_lab   hover label for x-axis variable (string)
+    title       title of plot (string)
+    x_lab       x-axis label (string)
+    dfRB        running back dataframe (dataframe)
+    dfWR        wide receiver dataframe (dataframe)
+    dfQB        quarterback dataframe (dataframe)
+    """
+    source = ColumnDataSource(data=dict(x=dfQB[xvar], y=dfQB['passing_yards'], name=dfQB['name'],))
     hover = HoverTool(
             tooltips=[('Player', '@name'),(hover_lab, '$x{1.11}'),('Career Passing Yds', '@y'),])
     p3 = figure(plot_width=600, plot_height=700, tools="pan,wheel_zoom,box_zoom,reset,resize",
@@ -91,6 +132,12 @@ def qb(yvar, hover_lab, title, x_lab, dfRB, dfWR, dfQB):
 
 
 def plot_40dash():
+    """
+    Plot of 40 yard times by yardage with tabs for each position.
+
+    Calls:
+    make_dfs(), rb(), wr(), qb()
+    """
     dfRB, dfWR, dfQB = make_dfs()
     output_notebook()
 #    output_file('40yd.html')
@@ -100,8 +147,13 @@ def plot_40dash():
     tabs = Tabs(tabs=[ tab1, tab2, tab3 ])
     show(tabs)
 
-
 def plot_twentyss():
+    """
+    Plot of 20 yard shuttle times by yardage with tabs for each position.
+
+    Calls:
+    make_dfs(), rb(), wr(), qb()
+    """
     dfRB, dfWR, dfQB = make_dfs()
     dfRB = dfRB[dfRB.twentyss > 0]
     dfWR = dfWR[dfWR.twentyss > 0]
@@ -116,6 +168,12 @@ def plot_twentyss():
     show(tabs)
 
 def plot_vertical():
+    """
+    Plot of vertical jump by yardage with tabs for each position.
+
+    Calls:
+    make_dfs(), rb(), wr(), qb()
+    """
     dfRB, dfWR, dfQB = make_dfs()
     dfRB = dfRB[dfRB.vertical > 0]
     dfWR = dfWR[dfWR.vertical > 0]
@@ -130,6 +188,12 @@ def plot_vertical():
     show(tabs)
 
 def plot_height():
+    """
+    Plot of height by yardage with tabs for each position.
+
+    Calls:
+    make_dfs(), rb(), wr(), qb()
+    """
     dfRB, dfWR, dfQB = make_dfs()
     output_notebook()
 #    output_file('40yd.html')
@@ -140,6 +204,12 @@ def plot_height():
     show(tabs)
 
 def plot_speedscore():
+    """
+    Plot of speedscore by yardage with tabs for each position.
+
+    Calls:
+    make_dfs(), rb(), wr(), qb()
+    """
     dfRB, dfWR, dfQB = make_dfs()
     output_notebook()
 #    output_file('40yd.html')
