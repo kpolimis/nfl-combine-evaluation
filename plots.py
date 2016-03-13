@@ -157,7 +157,7 @@ def plot_twentyss():
     dfRB, dfWR, dfQB = make_dfs()
     dfRB = dfRB[dfRB.twentyss > 0]
     dfWR = dfWR[dfWR.twentyss > 0]
-    dfQB = dfQB[dfQB.twentyss > 0]
+    dfQB = dfQB[dfQB.twentyss > 2] #Remove Alex Smith (incorrect time)
 
     output_notebook()
 #    output_file('40yd.html')
@@ -177,7 +177,7 @@ def plot_vertical():
     dfRB, dfWR, dfQB = make_dfs()
     dfRB = dfRB[dfRB.vertical > 0]
     dfWR = dfWR[dfWR.vertical > 0]
-    dfQB = dfQB[dfQB.vertical > 0]
+    dfQB = dfQB[dfQB.vertical > 20] #Remove Alex Smith (incorrect measurement)
 
     output_notebook()
 #    output_file('40yd.html')
