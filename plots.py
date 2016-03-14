@@ -73,7 +73,7 @@ def rb(xvar, hover_lab, title, x_lab, dfRB, dfWR, dfQB):
     hover = HoverTool(tooltips=[('Player', '@name'),(hover_lab, '$x{1.11}'),
                                 ('Career Rushing Yards', '@rush'),('Career Receiving Yards', '@rec'),
                                 ('Total Yards', '@y'),])
-    p1 = figure(plot_width=600, plot_height=700, tools='pan,wheel_zoom,box_zoom,reset,resize',
+    p1 = figure(plot_width=600, plot_height=700, tools='pan,wheel_zoom,box_zoom,reset,resize,save',
                title=title, x_axis_label =x_lab, y_axis_label ='Career Rushing and Receiving Yards')
     p1.add_tools(hover)
     p1.circle('x', 'y', size=7, color='cyan', source=source)
@@ -98,7 +98,7 @@ def wr(xvar, hover_lab, title, x_lab, dfRB, dfWR, dfQB):
     hover = HoverTool(tooltips=[('Player', '@name'),(hover_lab, '$x{1.11}'),
                                 ('Career Rushing Yards', '@rush'),('Career Receiving Yards', '@rec'),
                                 ('Total Yards', '@y'),])
-    p2 = figure(plot_width=600, plot_height=700, tools="pan,wheel_zoom,box_zoom,reset,resize",
+    p2 = figure(plot_width=600, plot_height=700, tools="pan,wheel_zoom,box_zoom,reset,resize,save",
                title=title,
                x_axis_label =x_lab, y_axis_label ='Career Rushing and Receiving Yards')
     p2.add_tools(hover)
@@ -122,7 +122,7 @@ def qb(xvar, hover_lab, title, x_lab, dfRB, dfWR, dfQB):
     source = ColumnDataSource(data=dict(x=dfQB[xvar], y=dfQB['passing_yards'], name=dfQB['name'],))
     hover = HoverTool(
             tooltips=[('Player', '@name'),(hover_lab, '$x{1.11}'),('Career Passing Yds', '@y'),])
-    p3 = figure(plot_width=600, plot_height=700, tools="pan,wheel_zoom,box_zoom,reset,resize",
+    p3 = figure(plot_width=600, plot_height=700, tools="pan,wheel_zoom,box_zoom,reset,resize,save",
                title=title,
                x_axis_label =x_lab, y_axis_label ='Career Passing Yards')
     p3.add_tools(hover)
