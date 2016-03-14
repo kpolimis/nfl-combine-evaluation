@@ -8,9 +8,9 @@ positioning in the ensuing NFL draft months after the combine. Our goal with thi
 project was to determine the association between pre-draft metrics and career performance 
 
 Passing, rushing and receiving data for individual seasons:  
-[Pro-football reference](http://www.pro-football-reference.com)  
+[Pro-football reference](http://www.pro-football-reference.com/years/2015/passing.htm)  
 Scouting combine and player database:  
-[NFL savant](http://www.nflsavant.com)  
+[NFL savant](http://www.nflsavant.com/about.php)  
 
 To install and run:  
 Windows and OSX install instructions (Maverick & Yosemite):
