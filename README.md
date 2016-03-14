@@ -2,7 +2,7 @@
 collaborators: Long Chen, Melaku Dubie, Rich Lee and Kivan Polimis
 
 Every year, hundreds of collegiate football players are invited to participate in
-a week-long scouting combine. Players are evaluated by NFL personal departments 
+a week-long scouting combine. Players are evaluated by NFL personnel departments 
 on a series of physical and mental tests. Results from these “measurables” influence
 positioning in the ensuing NFL draft months after the combine. Our goal with this 
 project was to determine the association between pre-draft metrics and career performance 
