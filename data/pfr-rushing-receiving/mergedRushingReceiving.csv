@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+name,team,age,position,games_played,games_started,rushing_attempts,rushing_yards,rushing_TD,rushing_long,rushing_ydsAtt,rushing_ydsGame,rushing_attGame,receiving_targets,receiving_receptions,receiving_yards,receiving_ydsRec,receiving_TD,receiving_long,receiving_recsGame,receiving_ydsGame,yardsfromScrimmage,RRTD,fumbles,year
+=======
 name,team,age,position,games_played,games_Started,rushing_attempts,rushing_yards,rushing_TD,rushing_long,rushing_ydsAtt,rushing_ydsGame,rushing_attGame,receiving_targets,receiving_receptions,receiving_yards,receiving_yardsRec,receiving_TD,receiving_long,receiving_recGame,receiving_ydsGame,yards_from_scrimmage,RRTD,fumbles,year
+>>>>>>> 3bc75c5bfeb2bea2d56083ecad6055c8c008e762
 Eddie George,TEN,27,RB,16,16,403,1509,14,35,3.7,94.3,25.2,65,50,453,9.1,2,24,3.1,28.3,1962,16,5,2000
 Edgerrin James,IND,22,RB,16,16,387,1709,13,30,4.4,106.8,24.2,87,63,594,9.4,5,60,3.9,37.1,2303,18,5,2000
 Jerome Bettis,PIT,28,RB,16,16,355,1341,8,30,3.8,83.8,22.2,20,13,97,7.5,0,25,0.8,6.1,1438,8,1,2000
