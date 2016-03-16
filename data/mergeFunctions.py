@@ -7,8 +7,8 @@ def cleanPassing(folder_path, output_filename):
     """
     Cleans and processes multiple .csv passing data files
     Creates new merged passing .csv file
-    folder_path:  string of file folder with .csv of passing data files
-    output_filename:  string name for merged .csv file
+    folder_path: string of file folder with .csv of passing data files
+    output_filename: string name for merged .csv file
     """
     try:
         os.remove(output_filename+".csv")
@@ -20,7 +20,7 @@ def cleanPassing(folder_path, output_filename):
         df = pd.read_csv(input_file)
         filename_year = input_file.split("_")[1]
         df = df.drop(['Rk'],  axis=1)
-        df.rename(columns={'Unnamed: 1': 'Name'},  inplace=True)
+        df.rename(columns={'Unnamed: 1': 'Name'}, inplace=True)
         df['year'] = filename_year
         df_list.append(df)
     joined_data = pd.concat(df_list)
@@ -64,18 +64,18 @@ def cleanPassing(folder_path, output_filename):
     unclean_df['losses'] = unformatted_record.str.split("/").str[1]
     unclean_df['name'] = unclean_df['name'].str.replace('[+|*]', "")
     unclean_df['wins'] = unclean_df['wins'].astype('float')
-    unclean_df = pd.DataFrame(data=unclean_df,  columns=ordered_columns)
+    unclean_df = pd.DataFrame(data=unclean_df, columns=ordered_columns)
     clean_df = unclean_df[pd.notnull(unclean_df['name'])]
-    clean_df.sort_values('wins',  ascending=False,  axis=0,  inplace=True)
-    clean_df.to_csv("%s.csv" % output_filename,  index=False)
+    clean_df.sort_values('wins', ascending=False, axis=0, inplace=True)
+    clean_df.to_csv("%s.csv" % output_filename, index=False)
 
 
 def cleanRushingReceiving(folder_path, output_filename):
     """
     Cleans and processes multiple .csv files of rushing-receiving data
     Creates new merged rushing-receiving .csv file
-    folder_path:  string of file folder with .csvs of rushing-receiving data
-    output_filename:  string name for merged rushing-receiving .csv file
+    folder_path: string of file folder with .csvs of rushing-receiving data
+    output_filename: string name for merged rushing-receiving .csv file
     """
     try:
         os.remove(output_filename+".csv")
@@ -86,8 +86,8 @@ def cleanRushingReceiving(folder_path, output_filename):
     for input_file in glob.glob(os.path.join(current_dir, '*.csv')):
         df = pd.read_csv(input_file)
         filename_year = input_file.split("_")[1]
-        df = df.drop(['Unnamed: 0'],  axis=1)
-        df.rename(columns={'Unnamed: 1': 'Name'},  inplace=True)
+        df = df.drop(['Unnamed: 0'], axis=1)
+        df.rename(columns={'Unnamed: 1': 'Name'}, inplace=True)
         df['year'] = filename_year
         df_list.append(df)
     joined_data = pd.concat(df_list)
@@ -114,7 +114,6 @@ def cleanRushingReceiving(folder_path, output_filename):
     joined_data = joined_data.rename(columns=rushing_rec_columns)
     unclean_df = joined_data
     unclean_df['name'] = unclean_df['name'].str.replace('[+|*]', "")
-    unclean_df.head()
     clean_df = unclean_df[pd.notnull(unclean_df['name'])]
     clean_df.to_csv("%s.csv" % output_filename, index=False)
 
