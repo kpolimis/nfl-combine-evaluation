@@ -6,7 +6,7 @@ from bokeh.models import ColumnDataSource, HoverTool
 from bokeh.models.widgets import Panel, Tabs
 
 #Create database connection
-con = sqlite3.connect('data/nflPPdb.sqlite')
+con = sqlite3.connect('../data/nflPPdb.sqlite')
 
 #Create RB and WR dataframes
 def make_dfs():
