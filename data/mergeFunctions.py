@@ -4,7 +4,6 @@ import pandas as pd
 
 
 def cleanPassing(folder_path, output_filename):
-
     """
     Cleans and processes multiple .csv passing data files
     Creates new merged passing .csv file
@@ -15,7 +14,6 @@ def cleanPassing(folder_path, output_filename):
         os.remove(output_filename+".csv")
     except OSError:
         pass
-
     current_dir = folder_path
     df_list = []
     for input_file in glob.glob(os.path.join(current_dir, '*.csv')):
@@ -124,9 +122,9 @@ def cleanRushingReceiving(folder_path, output_filename):
 def processPlayerDB(folder_path, input_file):
     """
     Cleans and processes .csv player database file
-    Creates new processed player databse .csv with suffix "-processed" appended
-    folder_path:  string of file folder with .csv of player database
-    input_file:  string of .csv player database file name
+    Creates new player database .csv from input_file with suffix "-processed"
+    folder_path: string of file folder with .csv of player database
+    input_file: string of .csv player database file name
     """
     try:
         os.remove("%s-processed.csv" % input_file)
@@ -146,11 +144,14 @@ def processPlayerDB(folder_path, input_file):
                  }
     playerDB['height'] = playerDB['height'].astype('string')
     playerDB['height'].replace(height_map, inplace=True)
-    playerDB['height'] = playerDB['height'].replace('', '', regex=True).astype('int64')
-    playerDB['draft_round'] = playerDB['draft_round'].replace('[^0-9]', '', regex=True).astype('string')
+    playerDB['height'] = playerDB['height'].replace(
+                         '', '', regex=True).astype('int64')
+    playerDB['draft_round'] = playerDB['draft_round'].replace(
+                              '[^0-9]', '', regex=True).astype('string')
     playerDB['draft_round'].replace({'nan': '0'}, inplace=True)
     playerDB['draft_round'] = playerDB['draft_round'].astype('int64')
-    playerDB['draft_pick'] = playerDB['draft_pick'].replace('[^0-9]', '', regex=True).astype('string')
+    playerDB['draft_pick'] = playerDB['draft_pick'].replace(
+                             '[^0-9]', '', regex=True).astype('string')
     playerDB['draft_pick'].replace({'nan': '0', '': '0'}, inplace=True)
     playerDB['draft_pick'] = playerDB['draft_pick'].astype('int64')
     playerDB.to_csv("%s-processed.csv" % input_file, index=False)
