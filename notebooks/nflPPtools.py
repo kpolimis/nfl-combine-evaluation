@@ -163,17 +163,13 @@ def processPlayerDB(folder_path, input_file):
     playerDB['draft_pick'].replace({'nan': '0', '': '0'}, inplace=True)
     playerDB['draft_pick'] = playerDB['draft_pick'].astype('int64')
     playerDB.to_csv("%s-processed.csv" % input_file, index=False)
-import numpy as np
-import pandas as pd
-import sqlite3
-from bokeh.plotting import figure, output_file, output_notebook, show
-from bokeh.models import ColumnDataSource, HoverTool
-from bokeh.models.widgets import Panel, Tabs
 
-#Create database connection
+# Create database connection
 con = sqlite3.connect('../data/nflPPdb.sqlite')
 
-#Create RB and WR dataframes
+# Create RB and WR dataframes
+
+
 def make_dfs():
     """
     Creates dataframes for plotting using SQL queries.
@@ -188,25 +184,25 @@ def make_dfs():
     df2 = pd.read_sql_query('SELECT combine.name, combine.year, players.position\
                             FROM combine, players\
                             WHERE combine.name = players.name AND combine.year = players.draft_year', con)
-    df3 = pd.merge(df1, df2, on=['name', 'year'], how='inner', suffixes=('df1','df2'))
+    df3 = pd.merge(df1, df2, on=['name', 'year'], how='inner', suffixes=('df1', 'df2'))
     df3 = df3.drop_duplicates(subset='name', keep=False)
     df4 = pd.read_sql_query('SELECT DISTINCT combine.name, rr.rushing_yards, rr.receiving_yards\
                             FROM combine, rr\
                             WHERE combine.name = rr.name AND combine.year < 2009', con)
-    df4 = pd.pivot_table(df4,index=['name'],aggfunc=np.sum).reset_index().fillna(0)
+    df4 = pd.pivot_table(df4, index=['name'], aggfunc=np.sum).reset_index().fillna(0)
     df4['totYds'] = (df4['receiving_yards'] + df4['rushing_yards']).astype(int)
-    df5 = pd.merge(df3,df4, on='name', how='inner', suffixes=('df3','df4'))
+    df5 = pd.merge(df3, df4, on='name', how='inner', suffixes=('df3', 'df4'))
     dfRB = df5[df5.position == 'RB']
-    dfRB = dfRB[dfRB.fortyyd < 5] #remove outliers
+    dfRB = dfRB[dfRB.fortyyd < 5]  # remove outliers
     dfWR = df5[df5.position == 'WR']
-    dfWR = dfWR[dfWR.fortyyd < 5] #remove outliers
+    dfWR = dfWR[dfWR.fortyyd < 5]  # remove outliers
 
-    #Create QB data frame
+    # Create QB data frame
     dfQB = pd.read_sql_query('SELECT DISTINCT combine.name, combine.fortyyd, combine.heightinchestotal,\
                             combine.weight, combine.twentyss, combine.vertical, passing.passing_yards\
                             FROM combine, passing\
                             WHERE combine.name = passing.name AND combine.year < 2009', con)
-    dfQB['count'] = 1 #use to get 40 yard time back after aggregating
+    dfQB['count'] = 1  #  use to get 40 yard time back after aggregating
     dfQB = pd.pivot_table(dfQB,index=['name'],aggfunc=np.sum).reset_index()
     dfQB['fortyyd'] = dfQB['fortyyd']/dfQB['count']
     dfQB['heightinchestotal'] = dfQB['heightinchestotal']/dfQB['count']
@@ -239,7 +235,7 @@ def rb(xvar, hover_lab, title, x_lab, dfRB, dfWR, dfQB):
                                 ('Career Rushing Yards', '@rush'),('Career Receiving Yards', '@rec'),
                                 ('Total Yards', '@y'),])
     p1 = figure(plot_width=600, plot_height=700, tools='pan,wheel_zoom,box_zoom,reset,resize,save',
-               title=title, x_axis_label =x_lab, y_axis_label ='Career Rushing and Receiving Yards')
+               title=title, x_axis_label=x_lab, y_axis_label='Career Rushing and Receiving Yards')
     p1.add_tools(hover)
     p1.circle('x', 'y', size=7, color='cyan', source=source)
     tab1 = Panel(child=p1, title='RB')
@@ -309,7 +305,7 @@ def plot_40dash():
     tab1 = rb('fortyyd', '40 Yard Dash', 'RB: Total Yards by 40 Yard Dash', '40 Yard Dash', dfRB, dfWR, dfQB)
     tab2 = wr('fortyyd', '40 Yard Dash', 'WR: Total Yards by 40 Yard Dash', '40 Yard Dash', dfRB, dfWR, dfQB)
     tab3 = qb('fortyyd', '40 Yard Dash', 'QB: Total Yards by 40 Yard Dash', '40 Yard Dash', dfRB, dfWR, dfQB)
-    tabs = Tabs(tabs=[ tab1, tab2, tab3 ])
+    tabs = Tabs(tabs=[tab1, tab2, tab3])
     show(tabs)
 
 def plot_twentyss():
@@ -329,7 +325,7 @@ def plot_twentyss():
     tab1 = rb('twentyss', '20 Yd Shuttle', 'RB: Total Yards by Short Shuttle', '20 Yard Short Shuttle', dfRB, dfWR, dfQB)
     tab2 = wr('twentyss', '20 Yd Shuttle', 'WR: Total Yards by Short Shuttle', '20 Yard Short Shuttle', dfRB, dfWR, dfQB)
     tab3 = qb('twentyss', '20 Yd Shuttle', 'QB: Total Yards by Short Shuttle', '20 Yard Short Shuttle', dfRB, dfWR, dfQB)
-    tabs = Tabs(tabs=[ tab1, tab2, tab3 ])
+    tabs = Tabs(tabs=[tab1, tab2, tab3])
     show(tabs)
 
 def plot_vertical():
@@ -349,7 +345,7 @@ def plot_vertical():
     tab1 = rb('vertical', 'Vertical Jump (in)', 'RB: Total Yards by Vertical Jump', 'Vertical Jump (in)', dfRB, dfWR, dfQB)
     tab2 = wr('vertical', 'Vertical Jump (in)', 'WR: Total Yards by Vertical Jump', 'Vertical Jump (in)', dfRB, dfWR, dfQB)
     tab3 = qb('vertical', 'Vertical Jump (in)', 'QB: Total Yards by Vertical Jump', 'Vertical Jump (in)', dfRB, dfWR, dfQB)
-    tabs = Tabs(tabs=[ tab1, tab2, tab3 ])
+    tabs = Tabs(tabs=[tab1, tab2, tab3])
     show(tabs)
 
 def plot_height():
@@ -365,7 +361,7 @@ def plot_height():
     tab1 = rb('heightinchestotal', 'Height (in)', 'RB: Total Yards by Height', 'Height (in)', dfRB, dfWR, dfQB)
     tab3 = qb('heightinchestotal', 'Height (in)', 'QB: Total Yards by Height', 'Height (in)', dfRB, dfWR, dfQB)
     tab2 = wr('heightinchestotal', 'Height (in)', 'WR: Total Yards by Height', 'Height (in)', dfRB, dfWR, dfQB)
-    tabs = Tabs(tabs=[ tab1, tab2, tab3 ])
+    tabs = Tabs(tabs=[tab1, tab2, tab3])
     show(tabs)
 
 
@@ -382,7 +378,7 @@ def plot_speedscore():
     tab1 = rb('speedscore', 'Speed Score', 'RB: Total Yards by Speed Score', 'Speed Score', dfRB, dfWR, dfQB)
     tab3 = qb('speedscore', 'Speed Score', 'QB: Total Yards by Speed Score', 'Speed Score', dfRB, dfWR, dfQB)
     tab2 = wr('speedscore', 'Speed Score', 'WR: Total Yards by Speed Score', 'Speed Score', dfRB, dfWR, dfQB)
-    tabs = Tabs(tabs=[ tab1, tab2, tab3 ])
+    tabs = Tabs(tabs=[tab1, tab2, tab3])
     show(tabs)
 
 
@@ -504,16 +500,16 @@ def plot_graph():
     pfrTeamsYear = pfrTeams[pfrTeams.Year.isin(userSelection)]
     pfrAgg = pfrTeamsYear[['COMP','ATT','PassYD','PassTD','INT','rush',
                            'rushYD','rushTD','rec','recYD','recTD']]. \
-             groupby(pfrTeamsYear['Team']).sum().transpose()
+                           groupby(pfrTeamsYear['Team']).sum().transpose()
 
-    #Plot data as bar chart and save to .png
+    # Plot data as bar chart and save to .png
     plt.figure()
     pfrAgg.plot(kind='bar', figsize=(7, 13))
     plt.legend(fontsize = 14, loc = 'best')
     plt.suptitle(year, fontsize=24)
     plt.savefig('sample_plot.png', bbox_inches='tight')
 
-#Create database connection
+# Create database connection
 con = sqlite3.connect('data/nflPPdb.sqlite')
 
 #Create RB and WR dataframes
@@ -523,7 +519,7 @@ def make_dfs():
 
     Returns a dataframe for each positional group (dfRB, dfWR, dfQB).
     """
-    df1 = pd.read_sql_query('SELECT combine.name, combine.fortyyd, combine.heightinchestotal,\
+    df1 = pd.read_sql_query('SELECT combine.name, combine.fortyyd,combine.heightinchestotal,\
                             combine.weight, combine.twentyss, combine.vertical, combine.year\
                             FROM combine\
                             WHERE combine.year < 2009 AND combine.pickround != 0', con)
@@ -658,7 +654,7 @@ def plot_40dash():
     tab1 = rb('fortyyd', '40 Yard Dash', 'RB: Total Yards by 40 Yard Dash', '40 Yard Dash', dfRB, dfWR, dfQB)
     tab2 = wr('fortyyd', '40 Yard Dash', 'WR: Total Yards by 40 Yard Dash', '40 Yard Dash', dfRB, dfWR, dfQB)
     tab3 = qb('fortyyd', '40 Yard Dash', 'QB: Total Yards by 40 Yard Dash', '40 Yard Dash', dfRB, dfWR, dfQB)
-    tabs = Tabs(tabs=[ tab1, tab2, tab3 ])
+    tabs = Tabs(tabs=[tab1, tab2, tab3])
     show(tabs)
 
 def plot_twentyss():
@@ -678,7 +674,7 @@ def plot_twentyss():
     tab1 = rb('twentyss', '20 Yd Shuttle', 'RB: Total Yards by Short Shuttle', '20 Yard Short Shuttle', dfRB, dfWR, dfQB)
     tab2 = wr('twentyss', '20 Yd Shuttle', 'WR: Total Yards by Short Shuttle', '20 Yard Short Shuttle', dfRB, dfWR, dfQB)
     tab3 = qb('twentyss', '20 Yd Shuttle', 'QB: Total Yards by Short Shuttle', '20 Yard Short Shuttle', dfRB, dfWR, dfQB)
-    tabs = Tabs(tabs=[ tab1, tab2, tab3 ])
+    tabs = Tabs(tabs=[tab1, tab2, tab3])
     show(tabs)
 
 def plot_vertical():
@@ -698,7 +694,7 @@ def plot_vertical():
     tab1 = rb('vertical', 'Vertical Jump (in)', 'RB: Total Yards by Vertical Jump', 'Vertical Jump (in)', dfRB, dfWR, dfQB)
     tab2 = wr('vertical', 'Vertical Jump (in)', 'WR: Total Yards by Vertical Jump', 'Vertical Jump (in)', dfRB, dfWR, dfQB)
     tab3 = qb('vertical', 'Vertical Jump (in)', 'QB: Total Yards by Vertical Jump', 'Vertical Jump (in)', dfRB, dfWR, dfQB)
-    tabs = Tabs(tabs=[ tab1, tab2, tab3 ])
+    tabs = Tabs(tabs=[tab1, tab2, tab3])
     show(tabs)
 
 def plot_height():
@@ -714,7 +710,7 @@ def plot_height():
     tab1 = rb('heightinchestotal', 'Height (in)', 'RB: Total Yards by Height', 'Height (in)', dfRB, dfWR, dfQB)
     tab3 = qb('heightinchestotal', 'Height (in)', 'QB: Total Yards by Height', 'Height (in)', dfRB, dfWR, dfQB)
     tab2 = wr('heightinchestotal', 'Height (in)', 'WR: Total Yards by Height', 'Height (in)', dfRB, dfWR, dfQB)
-    tabs = Tabs(tabs=[ tab1, tab2, tab3 ])
+    tabs = Tabs(tabs=[tab1, tab2, tab3])
     show(tabs)
 
 def plot_speedscore():
@@ -730,5 +726,5 @@ def plot_speedscore():
     tab1 = rb('speedscore', 'Speed Score', 'RB: Total Yards by Speed Score', 'Speed Score', dfRB, dfWR, dfQB)
     tab3 = qb('speedscore', 'Speed Score', 'QB: Total Yards by Speed Score', 'Speed Score', dfRB, dfWR, dfQB)
     tab2 = wr('speedscore', 'Speed Score', 'WR: Total Yards by Speed Score', 'Speed Score', dfRB, dfWR, dfQB)
-    tabs = Tabs(tabs=[ tab1, tab2, tab3 ])
+    tabs = Tabs(tabs=[tab1, tab2, tab3])
     show(tabs)
