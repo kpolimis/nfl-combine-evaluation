@@ -7,11 +7,21 @@ on a series of physical and mental tests. Results from these “measurables” i
 positioning in the ensuing NFL draft months after the combine. Our goal with this 
 project was to determine the association between pre-draft metrics and career performance 
 
+## Interactive plotting
+Press the [![Binder](http://mybinder.org/badge.svg)](http://mybinder.org/repo/kpolimis/NFLCombineEvaluationNotebooks) link to open a jupyter notebook directory window.
+Select plots.ipynb to start an interactive notebook that plots the relationship between assorted Combine
+metrics (40 time, vertical, speed score, etc.) and total yards in a NFL career for quarterbacks, running backs and wide receivers
+
+![rb-plot-example](rb-plot-example.png)
+
+
+## Data sources
 Passing, rushing and receiving data for individual seasons:  
 [Pro-football reference](http://www.pro-football-reference.com/years/2015/passing.htm)  
 Scouting combine and player database:  
 [NFL savant](http://www.nflsavant.com/about.php)  
 
+## Installation
 To install and run:  
 Windows and OSX install instructions (Maverick & Yosemite):
 
