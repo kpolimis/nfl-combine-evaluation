@@ -12,7 +12,7 @@ Press the [![Binder](http://mybinder.org/badge.svg)](http://mybinder.org/repo/kp
 Select plots.ipynb to start an interactive notebook that plots the relationship between assorted Combine
 metrics (40 time, vertical, speed score, etc.) and total yards in a NFL career for quarterbacks, running backs and wide receivers
 
-![rb-plot-example](rb-plot-example.png=150x300)
+![rb-plot-example](rb-plot-example.png =150x300)
 
 
 ## Data sources
