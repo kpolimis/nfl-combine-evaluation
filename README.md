@@ -2,17 +2,17 @@
 collaborators: Long Chen, Melaku Dubie, Rich Lee and Kivan Polimis
 
 Every year, hundreds of collegiate football players are invited to participate in
-a week-long scouting combine. Players are evaluated by NFL personnel departments 
+a week-long scouting combine. Players are evaluated by NFL personnel departments
 on a series of physical and mental tests. Results from these “measurables” influence
-positioning in the ensuing NFL draft months after the combine. Our goal with this 
-project was to determine the association between pre-draft metrics and career performance 
+positioning in the ensuing NFL draft months after the combine. Our goal with this
+project was to determine the association between pre-draft metrics and career performance
 
 ## Interactive plotting
 Press the [![Binder](http://mybinder.org/badge.svg)](http://mybinder.org/repo/kpolimis/NFLCombineEvaluationNotebooks) link to open a jupyter notebook directory window.
 Select plots.ipynb to start an interactive notebook that plots the relationship between assorted Combine
 metrics (40 time, vertical, speed score, etc.) and total yards in a NFL career for quarterbacks, running backs and wide receivers
 
-![rb-plot-example](rb-plot-example.png)
+![rb-plot-example](rb-plot-example.png=150x300)
 
 
 ## Data sources
