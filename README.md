@@ -7,7 +7,7 @@ Every year, hundreds of collegiate football players are invited to participate i
 The example plot below describes the analysis and interactive plotting features.
 
 ## Interactive plotting
-Press the [![Binder](http://mybinder.org/badge.svg)](http://mybinder.org:/repo/kpolimis/nfl-combine-evaluation-plots){:target="_blank"} link to open a jupyter notebook directory window.
+Press the [![Binder](http://mybinder.org/badge.svg)](http://mybinder.org:/repo/kpolimis/nfl-combine-evaluation-plots) link to open a jupyter notebook directory window.
 Select plots.ipynb to start an interactive notebook that plots the relationship between assorted Combine
 metrics (40 time, vertical, speed score, etc.) and total yards in a NFL career for quarterbacks, running backs and wide receivers. 
 
@@ -18,7 +18,7 @@ Below each metric-specific plot is an explanation of the metric, the goal of the
 Hovering over an individual point on the plot reveals the following information: player name, result in the selected metric, and a combination of career rushing, receiving and passing yards depending on the player's position (selected by changing the tabs in the plot's upper left). Plots can also be zoomed in/out, saved, etc.
 
 ## Example Plot 
-![rb-plot-example](../../images/rb-plot-example.png)
+![rb-plot-example](rb-plot-example.png)
 
 ## Additional Information
 Passing, rushing and receiving data for individual seasons:  
